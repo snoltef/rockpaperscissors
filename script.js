@@ -49,14 +49,18 @@ function getPlayerChoice(){
   }
 }
 
+let scorePlayer = 0;
+let scoreComputer = 0;
 
-function game(){
-  let scorePlayer = 0;
-  let scoreComputer = 0;
-  console.log("Welcome!")
-  for(let i = 0 ; i < 5 ; i++){
-    const playerSelection = getPlayerChoice();
+const runningScore = document.getElementById('runningScore');
+const winnerResult = document.querySelector('#winner');
+
+function gameRock(){
+    const playerSelection = "rock";
     const computerSelection = getComputerChoice();
+    if(scoreComputer == 5){winnerResult.textContent ="Game Over, You Lose";}
+    else if(scorePlayer == 5){winnerResult.textContent = "Game Over, You Win";}
+      else{
     console.log(playRound(playerSelection, computerSelection));
     if(checkWinner(playerSelection,computerSelection) == "Player"){
       scorePlayer++;
@@ -65,14 +69,52 @@ function game(){
       scoreComputer++;
     }
   }
-  console.log("Game Over")
-  if(scorePlayer > scoreComputer){
-    console.log("Player was the winner");
+  runningScore.textContent = `Computer:`+scoreComputer+` Player: `+scorePlayer;
+}
+
+function gamePaper(){
+  const playerSelection = "paper";
+  const computerSelection = getComputerChoice();
+  if(scoreComputer == 5){winnerResult.textContent ="Game Over, You Lose";}
+  else if(scorePlayer == 5){winnerResult.textContent = "Game Over, You Win";}
+else{
+  console.log(playRound(playerSelection, computerSelection));
+  if(checkWinner(playerSelection,computerSelection) == "Player"){
+    scorePlayer++;
   }
-  else if(scoreComputer > scorePlayer){
-    console.log("Computer was the winner");
+  else if(checkWinner(playerSelection,computerSelection) == "Computer"){
+    scoreComputer++;
   }
+}
+  runningScore.textContent = `Computer:`+scoreComputer+` Player: `+scorePlayer;
 }
 
 
-game();
+
+
+function gameScissors(){
+  const playerSelection = "scissors";
+  const computerSelection = getComputerChoice();
+  if(scoreComputer == 5){winnerResult.textContent ="Game Over, You Lose";}
+  else if(scorePlayer == 5){winnerResult.textContent = "Game Over, You Win";}
+else{
+  console.log(playRound(playerSelection, computerSelection));
+  if(checkWinner(playerSelection,computerSelection) == "Player"){
+    scorePlayer++;
+  }
+  else if(checkWinner(playerSelection,computerSelection) == "Computer"){
+    scoreComputer++;
+  }
+}
+runningScore.textContent = `Computer:`+scoreComputer+` Player: `+scorePlayer;
+}
+ 
+const buttonRock = document.getElementById('buttonRock');
+buttonRock.addEventListener("click",gameRock);
+
+const buttonPaper = document.getElementById('buttonPaper');
+buttonPaper.addEventListener("click",gamePaper);
+
+const buttonScissors = document.getElementById('buttonScissors');
+buttonScissors.addEventListener("click",gameScissors);
+
